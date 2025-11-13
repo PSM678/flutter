@@ -1,0 +1,40 @@
+main.dart
+========
+int addNumbers(int a, int b) {
+  return a + b;
+}
+
+int subNumbers(int a, int b) {
+  return a - b;
+}
+==================
+widget_test.dart
+=================
+import 'package:flutter_test/flutter_test.dart';
+import 'package:exp_10_a/main.dart';
+
+void main() {
+  test('addNumbers returns the correct sum', () {
+    // Arrange
+    int a = 5;
+    int b = 3;
+
+    // Act
+    int result = addNumbers(a, b);
+
+    // Assert
+    expect(result, 9);
+  });
+
+  test('subNumbers returns the correct difference', () {
+    // Arrange
+    int a = 5;
+    int b = 3;
+
+    // Act
+    int result = subNumbers(a, b);
+
+    // Assert
+    expect(result, 2);
+  });
+}
