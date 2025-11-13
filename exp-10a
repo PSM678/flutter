@@ -1,0 +1,131 @@
+10a) Write unit tests for UI components
+======================================
+step-1
+=======
+create a new folder using(ctrl+shift+n)
+
+open the folder
+
+cmd
+
+code .
+
+open terminal using (ctrl+shift+~)
+
+
+step2:
+=======
+create a project
+
+flutter create exp_10_a
+
+Change to the Flutter project directory.
+
+step:3
+=======
+cd exp_10_a
+
+Open the lib/main.dart file in your Flutter project.
+
+Replace the existing code with the following code snippet:
+
+step 4:
+=======
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Flutter Demo Home Page')),
+        body: Center(
+          child: CustomButton(
+            label: 'Designed Button',
+            onPressed: () {
+              // Handle button press here
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  final String label;
+  final VoidCallback onPressed;
+
+  const CustomButton({super.key, required this.label, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      onPressed: onPressed,
+      child: Text(label),
+    );
+  }
+}
+
+=============================================================================================================================================
+flutter run
+============================================================
+open widget_test.dart file in test folder
+
+edit it with the following code:
+
+==============================================================
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:exp_10_a/main.dart';
+
+void main() {
+  testWidgets('CustomButton displays correctly and responds to taps', (WidgetTester tester) async {
+    bool isPressed = false;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: CustomButton(
+            label: 'Test Button',
+            onPressed: () {
+              isPressed = true;
+            },
+          ),
+        ),
+      ),
+    );
+
+    // Verify that the button is displayed
+    expect(find.text('Test Button'), findsOneWidget);
+
+    // Tap the button correctly
+    await tester.tap(find.text('Test Button'));
+    await tester.pump();
+
+    // Verify callback and UI
+    expect(isPressed, isTrue);
+    expect(find.text('Test Button'), findsOneWidget);
+  });
+}
+=======================================================
+To run the unit tests use:
+======================================================
+flutter test
